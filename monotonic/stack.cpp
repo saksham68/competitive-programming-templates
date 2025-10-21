@@ -2,6 +2,9 @@
 using namespace std;
 #define int long long 
 
+
+// should support everything a stack supports + minimum operation 
+// push pop top minimum 
 struct monotonic_stack {
 	stack<pair<int,int>> s;
 
@@ -11,6 +14,10 @@ struct monotonic_stack {
 
 	void pop() {
 		s.pop();
+	}
+
+	void top() {
+		return s.top().first;
 	}
 
 	int minimum() {
