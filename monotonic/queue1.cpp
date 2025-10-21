@@ -19,7 +19,7 @@ struct monotonic_queue {
 		   d.pop_back();
 		}
 		d.push_back(make_pair(inserted + 1,x));
-		appeared++;
+		inserted++;
 	}
 
 	void pop() {
@@ -28,25 +28,39 @@ struct monotonic_queue {
 	   if(d.front().first == removed + 1) {
 	      d.pop_front();
 	   }
+       removed++;
 	}
 
 	int minimum() {
-		return d.front().second();
+		return d.front().second;
 	}
-}
+};
 
 int32_t main() {
 
-	int n;
-	cin >> n;
-	if(n == 1) {
+	int n,k;
+    cin >> n >> k;
+    int x,a,b,c;
+    cin >> x >> a >> b >> c;
+    vector<int>v(n);
+    v[0] = x;
+    for(int i = 1; i < n; i++) {
+        v[i] = ((a * v[i - 1]) % c  + b) % c;
+    }
+    monotonic_queue q;
+    int ans = 0;
 
-	} else if(n == 2) {
+    for(int i = 0; i < n; i++) {
+        q.push(v[i]);
 
-	} else if(n == 3) {
+        if(i >= k - 1) {
+            ans ^= (q.minimum());
+            q.pop();
+        }
+    }
 
-	} else {
-		
-	}
+    cout << ans << '\n';
+
+
 
 }
